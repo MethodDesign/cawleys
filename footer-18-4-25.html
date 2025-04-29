@@ -43,8 +43,8 @@
 	navFunction(document.querySelector('.header-nav-item--external + .header-nav-item'))
 	updateglobalsizesFunction()
 	headerbackgroundFunction()
-	acefeaturesFunction(footerSections, "Footer")
-	acefeaturesFunction(pageSections, "On-Page")
+	acefeaturesFunction(footerSections)
+	acefeaturesFunction(pageSections)
 	console.log('custom stuff:', aceArray);
 	gallerycaptionFunction($$('.gallery-fullscreen-slideshow figcaption'))
 	galleryblockFunction($$('.gallery-block'))
@@ -115,8 +115,7 @@
 	  if (scrollPosY > 10) header.classList.add('shrink')
 	} // end checkscrollposition
 
-	function acefeaturesFunction(sections, area) {
-		console.log(area);
+	function acefeaturesFunction(sections) {
 	  let previousTheme;
 	  sections.forEach((section,index) => {
 		const nextElement = section.nextElementSibling,
@@ -142,7 +141,6 @@
 		  const customSettings = JSON.parse('{'+embedBlock.textContent+'}'),
 				features = customSettings.features.split(' ')
 		  customSettings.features = features;
-		  //console.log("james")
 		  console.log(customSettings.features)
 		  customSettings.element = embedBlock;
 		  aceArray.push(customSettings)
@@ -161,7 +159,7 @@
 		  featureSection.classList.add('has-'+feature);
 		  switch (feature) {
 			case 'plugin':
-			  pluginFunction(itemJson)
+			  //pluginFunction(itemJson)
 			  break
 			case 'grid':
 			  gridFunction(itemJson)
@@ -181,12 +179,9 @@
 	}
 
 	function pluginFunction(itemJson) {
-	 console.log("Plugin function",  )
 	  var pluginName = itemJson['plugin-name'],
 		  embedElement = itemJson.element,
 		  pluginElement = embedElement.previousElementSibling ? embedElement.previousElementSibling : embedElement.closest('.sqs-layout');
-		 console.log("Review: "+pluginName);
-		 console.log("Element: "+pluginElement);
 	  if(!window[pluginName]) {
 		pluginElement.classList.add(pluginName)
 		window[pluginName] = pluginElement;
@@ -208,7 +203,6 @@
 	} // end custom grid using stacked gallery block
 
 	function sliderFunction(itemJson){
-		console.log("Slider Function");
 	  const sliderBlock = itemJson.element.previousElementSibling,
 			defaultSplideOptions = {
 			  type: 'slide',
